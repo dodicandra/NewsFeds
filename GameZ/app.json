@@ -24,12 +24,18 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "config": {
+        "googleMobileAdsAppId": "ca-app-pub-8960982869518476~9464385657"
+      }
     },
     "android": {
       "package": "com.koosz.NewsFeds",
       "versionCode": 1,
-      "permissions": []
+      "permissions": [],
+      "config": {
+        "googleMobileAdsAppId": "ca-app-pub-8960982869518476~9464385657"
+      }
     }
   }
 }

@@ -3,7 +3,6 @@ import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
 import Icons from '@expo/vector-icons/MaterialIcons';
 
 export default function Headers({ navigation, title }) {
-  console.log(navigation);
   const openDraw = () => {
     navigation.openDrawer();
   };
