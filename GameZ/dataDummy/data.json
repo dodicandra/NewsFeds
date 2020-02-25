@@ -1,0 +1,24 @@
+{
+  "people": [
+    {
+      "title": "PUBG",
+      "id": "123ewd",
+      "body": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt, animi vitae? Aspernatur totam quis voluptates adipisci odit earum repudiandae ipsa?"
+    },
+    {
+      "title": "Mobile Legends",
+      "id": "456rg",
+      "body": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt, animi vitae? Aspernatur totam quis voluptates adipisci odit earum repudiandae ipsa?"
+    },
+    {
+      "title": "PUBG Steam",
+      "id": "e6bjgj6",
+      "body": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt, animi vitae? Aspernatur totam quis voluptates adipisci odit earum repudiandae ipsa?"
+    },
+    {
+      "title": "Fire Fire",
+      "id": "e568tyhj",
+      "body": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt, animi vitae? Aspernatur totam quis voluptates adipisci odit earum repudiandae ipsa?"
+    }
+  ]
+}
