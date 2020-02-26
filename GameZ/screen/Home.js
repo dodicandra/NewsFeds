@@ -1,29 +1,40 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import {
   StyleSheet,
   View,
   Text,
-  Button,
   FlatList,
   TouchableOpacity,
-  Image,
   ImageBackground,
-  SafeAreaView,
+  RefreshControl,
+  Modal,
+  BackHandler,
 } from 'react-native';
 import Card from '../components/card';
+import Icons from '@expo/vector-icons/MaterialIcons';
 
 const Home = ({ navigation }) => {
   const [data, setData] = useState();
+  const [openModal, setOpenModal] = useState(false);
+  const [opacity, setOpacity] = useState({ opacity: 0 });
+  const [refresh, setRefresh] = useState(false);
   useEffect(() => {
-    const fetData = async () => {
-      const response = await fetch(
-        'http://newsapi.org/v2/top-headlines?country=id&category=technology&apiKey=60562f9576c1464ca30d27ce80c0cadb'
-      );
-      const result = await response.json();
-      setData(result.articles);
-    };
     fetData();
   }, []);
+
+  const fetData = async () => {
+    const response = await fetch(
+      'http://newsapi.org/v2/top-headlines?country=id&apiKey=60562f9576c1464ca30d27ce80c0cadb'
+    );
+    const result = await response.json();
+    console.log(result);
+    setData(result.articles);
+  };
+  const onRefresh = useCallback(async () => {
+    setRefresh(true);
+    await fetData();
+    setRefresh(false);
+  }, [refresh]);
 
   // const [data, setData] = useState([
   //   {
@@ -55,16 +66,47 @@ const Home = ({ navigation }) => {
     navigation.navigate('ReviewDetails', item);
   };
 
+  const onScrolHandler = (event) => {
+    const layout = event.nativeEvent.contentOffset.y;
+    const x = Math.floor(layout);
+    if (x >= 60) {
+      setOpacity({ opacity: 1 });
+    } else {
+      setOpacity({ opacity: 0 });
+    }
+  };
+
   return (
     <View style={styles.container}>
+      <Modal visible={openModal} animationType="slide">
+        <View style={styles.modalContent}>
+          <Icons
+            name="close"
+            size={25}
+            color="#373838"
+            style={styles.close}
+            onPress={() => setOpenModal(false)}
+          />
+          <Text>MODALS</Text>
+        </View>
+      </Modal>
+      <Icons
+        name="add"
+        size={25}
+        color="#373838"
+        style={[styles.icon, opacity]}
+        onPress={() => setOpenModal(true)}
+      />
       <FlatList
+        refreshControl={
+          <RefreshControl refreshing={refresh} onRefresh={onRefresh} />
+        }
+        onScroll={(e) => onScrolHandler(e)}
         data={data}
         keyExtractor={() => JSON.stringify(Math.random())}
         renderItem={({ item }) => {
           return (
-            <TouchableOpacity
-              onPress={() => navigation.navigate('ReviewDetails', item)}
-            >
+            <TouchableOpacity onPress={() => goTOReview(item)}>
               <Card>
                 <ImageBackground
                   imageStyle={{
@@ -89,6 +131,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fcfeff',
+    alignItems: 'center',
   },
   text: {
     fontSize: 15,
@@ -110,6 +153,21 @@ const styles = StyleSheet.create({
   image: {
     width: '100%',
     height: 120,
+  },
+  icon: {
+    position: 'absolute',
+    zIndex: 9999,
+    backgroundColor: '#000',
+    borderRadius: 50,
+    padding: 10,
+    top: 5,
+    color: '#fff',
+  },
+  modalContent: {
+    alignItems: 'center',
+  },
+  close: {
+    marginVertical: 10,
   },
 });
 

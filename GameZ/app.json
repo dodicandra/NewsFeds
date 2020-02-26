@@ -26,7 +26,7 @@
     "ios": {
       "supportsTablet": true,
       "config": {
-        "googleMobileAdsAppId": "ca-app-pub-8960982869518476~9464385657"
+        "googleMobileAdsAppId": "ca-app-pub-3212054662765091~9824807290"
       }
     },
     "android": {
@@ -34,8 +34,9 @@
       "versionCode": 1,
       "permissions": [],
       "config": {
-        "googleMobileAdsAppId": "ca-app-pub-8960982869518476~9464385657"
+        "googleMobileAdsAppId": "ca-app-pub-3212054662765091~9824807290"
       }
-    }
+    },
+    "description": ""
   }
 }

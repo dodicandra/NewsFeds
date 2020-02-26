@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
 import Icons from '@expo/vector-icons/MaterialIcons';
 
@@ -11,7 +11,7 @@ export default function Headers({ navigation, title }) {
       <TouchableOpacity style={styles.icon} onPress={openDraw}>
         <Icons name="menu" size={23} />
       </TouchableOpacity>
-      <View>
+      <View style={styles.headerContainer}>
         <Text style={styles.headerText}>{title}</Text>
       </View>
     </View>
@@ -35,5 +35,19 @@ const styles = StyleSheet.create({
   icon: {
     position: 'absolute',
     left: 16,
+  },
+  reslt: {
+    fontSize: 10,
+    backgroundColor: '#000',
+    padding: 8,
+    borderRadius: 100 / 2,
+    marginLeft: 10,
+    color: '#fff',
+  },
+  headerContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    alignContent: 'center',
   },
 });

@@ -30,6 +30,7 @@ const HomeStack = createStackNavigator(
         height: 60,
       },
     },
+    headerMode: 'screen',
   }
 );
 
