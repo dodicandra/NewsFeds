@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import * as Font from 'expo-font';
 import { AppLoading } from 'expo';
-import Navigation from './router/Drawer';
+import Navigation from './GameZ/router/Drawer';
 
 const getFont = () => {
   return Font.loadAsync({

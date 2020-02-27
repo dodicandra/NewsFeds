@@ -1,7 +1,7 @@
 import React from 'react';
 import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
-import About from '../screen/About';
+import About from '../../screen/About';
 import Headers from '../components/Header';
 
 const AbaoutStack = createStackNavigator({
