@@ -40,6 +40,7 @@ const RootDrawer = createDrawerNavigator(
       },
       labelStyle: {
         marginLeft: 30,
+        fontFamily: 'Acme-Regular',
       },
     },
     initialRouteName: 'Berita',

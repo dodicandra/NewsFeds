@@ -3,12 +3,13 @@ import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-navigation';
 import { DrawerItems } from 'react-navigation-drawer';
 import { AdMobInterstitial, setTestDeviceIDAsync } from 'expo-ads-admob';
+import * as Device from 'expo-device';
 
 export default function CostumDrawer(props) {
   const getAds = async () => {
     try {
       AdMobInterstitial.setAdUnitID('ca-app-pub-8960982869518476/1969873161');
-      await setTestDeviceIDAsync('EMULATOR');
+      await setTestDeviceIDAsync(Device.osBuildId.toString());
       await AdMobInterstitial.requestAdAsync({ servePersonalizedAds: true });
       await AdMobInterstitial.showAdAsync();
     } catch (error) {
@@ -24,6 +25,7 @@ export default function CostumDrawer(props) {
       <DrawerItems {...props} onItemPres={(e) => console.log(e)} />
       <TouchableOpacity onPress={getAds} style={styles.sponsor}>
         <Text style={styles.text}>Sponsor</Text>
+        <Text style={styles.support}>Support</Text>
       </TouchableOpacity>
     </SafeAreaView>
   );
@@ -39,7 +41,10 @@ const styles = StyleSheet.create({
     left: 100,
   },
   text: {
-    fontFamily: 'TradeWinds-Regular',
+    fontFamily: 'Acme-Regular',
     fontSize: 24,
+  },
+  support: {
+    fontSize: 7,
   },
 });

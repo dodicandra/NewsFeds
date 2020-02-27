@@ -32,21 +32,20 @@ export default function ReviewForm({ addNews }) {
         initialValues={{ title: '', urlToImage: '' }}
         onSubmit={(values) => {
           addNews(values);
-          console.log(values);
         }}
       >
         {(props) => (
-          <View>
+          <View style={styles.conteiner}>
             <TextInput
               style={styles.input}
-              placeholder="Review Details"
+              placeholder="Title"
               onChangeText={props.handleChange('title')}
               value={props.values.title}
             />
             <TextInput
               multiline
               style={styles.input}
-              placeholder="Review Body"
+              placeholder="Berita"
               onChangeText={props.handleChange('body')}
               value={props.values.body}
             />
@@ -60,11 +59,12 @@ export default function ReviewForm({ addNews }) {
               <Button
                 icon="camera"
                 mode="contained"
-                title="pick Image"
                 color="black"
                 onPress={() => pickImage(props.handleChange('urlToImage'))}
                 style={styles.btn}
-              ></Button>
+              >
+                Take
+              </Button>
 
               <Button
                 mode="contained"
@@ -87,6 +87,7 @@ const styles = StyleSheet.create({
   conteiner: {
     flex: 1,
     padding: 13,
+    marginTop: 30,
   },
   input: {
     borderWidth: 1,

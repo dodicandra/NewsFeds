@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     color: '#333',
     letterSpacing: 1,
-    fontFamily: 'TradeWinds-Regular',
+    fontFamily: 'Acme-Regular',
   },
   icon: {
     position: 'absolute',
