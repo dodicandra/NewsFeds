@@ -12,22 +12,36 @@ import {
 } from 'react-native';
 import Card from '../components/card';
 import Icons from '@expo/vector-icons/MaterialIcons';
+import ReviewForm from '../components/ReviewForm';
+import Constants from 'expo-constants';
+import * as Permissions from 'expo-permissions';
 
 const Home = ({ navigation }) => {
   const [data, setData] = useState();
   const [openModal, setOpenModal] = useState(false);
-  const [opacity, setOpacity] = useState({ opacity: 0 });
+  const [opacity, setOpacity] = useState(0);
   const [refresh, setRefresh] = useState(false);
   useEffect(() => {
     fetData();
   }, []);
+
+  useEffect(() => {
+    const getPermissionAsync = async () => {
+      if (Constants.platform.ios) {
+        const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
+        if (status !== 'granted') {
+          alert('Sorry, we need camera roll permissions to make this work!');
+        }
+      }
+    };
+    getPermissionAsync();
+  });
 
   const fetData = async () => {
     const response = await fetch(
       'http://newsapi.org/v2/top-headlines?country=id&apiKey=60562f9576c1464ca30d27ce80c0cadb'
     );
     const result = await response.json();
-    console.log(result);
     setData(result.articles);
   };
   const onRefresh = useCallback(async () => {
@@ -70,10 +84,17 @@ const Home = ({ navigation }) => {
     const layout = event.nativeEvent.contentOffset.y;
     const x = Math.floor(layout);
     if (x >= 60) {
-      setOpacity({ opacity: 1 });
+      setOpacity(1);
     } else {
-      setOpacity({ opacity: 0 });
+      setOpacity(0);
     }
+  };
+
+  const addNews = (data) => {
+    setData((curent) => {
+      return [data, ...curent];
+    });
+    setOpenModal(false);
   };
 
   return (
@@ -87,14 +108,14 @@ const Home = ({ navigation }) => {
             style={styles.close}
             onPress={() => setOpenModal(false)}
           />
-          <Text>MODALS</Text>
+          <ReviewForm addNews={addNews} />
         </View>
       </Modal>
       <Icons
         name="add"
         size={25}
         color="#373838"
-        style={[styles.icon, opacity]}
+        style={{ ...styles.icon, opacity: opacity }}
         onPress={() => setOpenModal(true)}
       />
       <FlatList
@@ -103,7 +124,7 @@ const Home = ({ navigation }) => {
         }
         onScroll={(e) => onScrolHandler(e)}
         data={data}
-        keyExtractor={() => JSON.stringify(Math.random())}
+        keyExtractor={() => Math.random().toString()}
         renderItem={({ item }) => {
           return (
             <TouchableOpacity onPress={() => goTOReview(item)}>
@@ -165,6 +186,7 @@ const styles = StyleSheet.create({
   },
   modalContent: {
     alignItems: 'center',
+    flex: 1,
   },
   close: {
     marginVertical: 10,
