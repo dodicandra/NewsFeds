@@ -189,7 +189,11 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   close: {
-    marginVertical: 10,
+    position: 'absolute',
+    bottom: 60,
+    backgroundColor: '#fc0345',
+    padding: 10,
+    borderRadius: 50,
   },
 });
 

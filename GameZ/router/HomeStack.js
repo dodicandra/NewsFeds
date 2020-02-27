@@ -6,7 +6,7 @@ import ReviewDetails from '../screen/ReviewDetails';
 
 const HomeStack = createStackNavigator(
   {
-    'News Feed': {
+    Berita: {
       screen: Home,
       navigationOptions: ({ navigation }) => {
         return {

@@ -5,7 +5,7 @@ import About from '../screen/About';
 import Headers from '../components/Header';
 
 const AbaoutStack = createStackNavigator({
-  'About-NewsFeed': {
+  About: {
     screen: About,
     navigationOptions: ({ navigation }) => {
       return {
